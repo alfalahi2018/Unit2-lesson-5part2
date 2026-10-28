@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rolly the Pill Bug | Unit 2 Awesome Animals | Lesson 5 Part 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;800&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#2a2347;--ok:#1fb25a;--bad:#e5383b;--sun:#ffd93d;--c:#2ec4b6;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font-family:Nunito,system-ui,sans-serif;color:var(--ink);font-weight:600;padding-bottom:40px;background:linear-gradient(180deg,#eaffe9 0%,#fffbe0 50%,#ffe9f3 100%) fixed}
+h1,h2,h3{font-family:'Baloo 2',system-ui,sans-serif;margin:0}
+header{position:relative;overflow:hidden;color:#fff;padding:16px 16px 12px;background:linear-gradient(110deg,#2ec4b6,#4ecb71 30%,#a5d936 55%,#ffb703 75%,#ff6b9d);border-bottom:6px solid #fff}
+header h1{font-size:clamp(24px,5.5vw,38px);font-weight:800;line-height:1.1;text-shadow:2px 3px 0 #0003;position:relative}
+header small{position:relative;font-weight:800;text-shadow:1px 1px 0 #0003}
+.fl{position:absolute;font-size:32px;opacity:.9;animation:fl 4s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-10px) rotate(8deg)}}
+.rolly{position:absolute;right:10px;bottom:-4px;width:110px;animation:roll 6s ease-in-out infinite}
+@keyframes roll{0%,100%{transform:translateX(0)}50%{transform:translateX(-20px) rotate(-6deg)}}
+.bar{position:relative;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.pill{background:#fff;color:var(--ink);border-radius:99px;padding:5px 12px;font-weight:800;box-shadow:0 3px 0 #0002}
+select,textarea,input{font:inherit;border:3px solid var(--ink);border-radius:12px;padding:5px 8px;background:#fff;color:var(--ink)}
+.tabs button{background:#ffffff40;color:#fff;border:3px solid #fff;border-radius:99px;padding:5px 14px;font:800 15px Nunito;cursor:pointer}
+.tabs button.on{background:#fff;color:var(--ink)}
+main{max-width:920px;margin:0 auto;padding:14px}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.st{background:var(--c);color:#fff;border:0;border-radius:20px;padding:12px;text-align:left;cursor:pointer;font:inherit;position:relative;box-shadow:0 6px 0 #0003;transition:transform .15s}
+.st:hover,.st:focus-visible{transform:translateY(-3px) rotate(-1deg);outline:4px solid #fff}
+.st .em{font-size:36px;display:block}.st b{display:block;font-family:'Baloo 2';font-size:19px;line-height:1.1;text-shadow:1px 1px 0 #0003}.st span{font-size:13px}
+.st.done::after{content:"✔";position:absolute;right:10px;top:6px;background:#fff;color:var(--ok);border-radius:50%;width:28px;height:28px;text-align:center;line-height:28px;font-size:18px}
+.st.cur{outline:4px solid var(--ink)}
+.prog{height:16px;background:#fff;border:3px solid var(--ink);border-radius:99px;margin:14px 0;overflow:hidden}.prog i{display:block;height:100%;background:linear-gradient(90deg,#2ec4b6,#a5d936,#ffb703,#ff6b9d);width:0;transition:width .5s}
+#stage{background:#fff;border:5px solid var(--c);border-radius:26px;padding:16px;min-height:180px;box-shadow:0 8px 0 #0002}
+#stage h2{color:var(--c);font-size:28px;filter:brightness(.8)}
+.tag{display:inline-block;background:var(--c);color:#fff;border-radius:99px;padding:2px 12px;font-size:13px;font-weight:800;margin-bottom:6px}
+.big{font-size:64px;text-align:center;line-height:1.1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:10px;background:#fff3c4;border-radius:18px;min-height:50px;margin:8px 0;border:3px dashed #ffbf47}
+.chip{color:#fff;border-radius:99px;padding:6px 16px;font:800 18px 'Baloo 2';cursor:grab;user-select:none;box-shadow:0 3px 0 #0003}
+.chip:nth-child(5n+1){background:#ff6b6b}.chip:nth-child(5n+2){background:#ff9f1c}.chip:nth-child(5n+3){background:#2ec4b6}.chip:nth-child(5n+4){background:#3a86ff}.chip:nth-child(5n){background:#9b5de5}
+.chip.sel{outline:4px solid var(--ink);transform:scale(1.08)}
+.slot{display:inline-block;min-width:110px;min-height:34px;border:3px dashed #999;border-radius:12px;text-align:center;font:800 17px 'Baloo 2';line-height:28px;background:#fff;padding:0 8px;vertical-align:middle}
+.slot.ok{border:3px solid var(--ok);background:#e3f6e9;color:var(--ok)}
+.row{background:#f4fff7;border:3px solid #bfe8c9;border-radius:16px;padding:8px 12px;margin:8px 0;font-size:18px;line-height:2.1}
+.row:nth-child(even){background:#fff6fb;border-color:#f5c6dd}
+.inp{width:150px;text-align:center;font-weight:800}.inp.ok{border-color:var(--ok);background:#e3f6e9}.inp.bad{border-color:var(--bad);background:#fdeceb}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:12px 0}
+.opt,.btn{border:3px solid var(--ink);background:#fff;border-radius:16px;padding:10px;font:800 18px Nunito;cursor:pointer;color:var(--ink);box-shadow:0 4px 0 #0002}
+.opt .e{font-size:40px;display:block}.opt:hover:not(:disabled){background:#fff3c4}.opt.ok{background:var(--ok);color:#fff;border-color:var(--ok)}
+.btn{background:var(--c);color:#fff;border-color:var(--c)}.btn.alt{background:#fff;color:var(--ink);border-color:var(--ink)}
+.scr{background:#fff8e6;border-left:6px solid var(--sun);padding:8px 12px;margin:8px 0;border-radius:8px}
+.no{animation:sh .4s;border-color:var(--bad)!important}@keyframes sh{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.msg{margin-top:12px;padding:12px 14px;border-radius:16px;background:#e3f6e9;border:3px solid var(--ok);font-weight:800}
+.cert{text-align:center;border:8px double #ff6b9d;background:linear-gradient(135deg,#fff,#fff4dc);border-radius:26px;padding:20px;margin:16px 0}.cert h2{font-size:32px;color:#2ec4b6}
+.boom{position:fixed;font-size:30px;pointer-events:none;animation:up 1.3s forwards;z-index:9}@keyframes up{to{transform:translateY(-240px) rotate(50deg);opacity:0}}
+table{border-collapse:collapse;width:100%;margin:8px 0;font-size:15px;background:#fff}td,th{border:2px solid #bfe8c9;padding:6px 8px;text-align:left;vertical-align:top}th{background:#2ec4b6;color:#fff}
+.plan{background:#fff;border-radius:22px;padding:14px;border:4px solid #2ec4b6}.plan h3{color:#ff6b9d;margin:16px 0 4px;font-size:22px}.plan ul{margin:4px 0;padding-left:20px}
+footer{text-align:center;margin-top:20px;font-weight:800;color:#2ec4b6}.hide{display:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head><body>
+<header>
+<span class="fl" style="left:3%;top:8px">🌿</span><span class="fl" style="left:28%;top:50px;animation-delay:-1s">🍃</span><span class="fl" style="left:52%;top:6px;animation-delay:-2s">🌼</span>
+<svg class="rolly" viewBox="0 0 120 70" aria-hidden="true"><ellipse cx="58" cy="40" rx="48" ry="24" fill="#9aa0c0"/><g stroke="#5d6190" stroke-width="3" fill="none"><path d="M28 18Q22 40 30 62M44 16Q38 40 46 64M60 15Q54 40 62 65M76 16Q70 40 78 64"/></g><ellipse cx="104" cy="42" rx="13" ry="11" fill="#7479a8"/><circle cx="108" cy="38" r="3" fill="#fff"/><circle cx="109" cy="38" r="1.5"/><path d="M112 32Q118 22 120 20" stroke="#5d6190" stroke-width="2" fill="none"/><path d="M30 62l-4 6M48 64l-3 6M66 64l-2 6M82 62l-1 6" stroke="#5d6190" stroke-width="3"/></svg>
+<h1>🌿 Rolly the Pill Bug’s Garden Quest</h1>
+<small>Unit 2 · Awesome animals · Lesson 5 part 2 · Animal verbs and the first conditional · Grade 7 (Oman)</small>
+<div class="bar">
+<span class="pill">⭐ Score: <b id="sc">0</b></span>
+<label class="pill">Level <select id="lvl" aria-label="Choose your level"><option value="support">Support 🌱</option><option value="standard" selected>Standard 🌿</option><option value="challenge">Challenge 🌳</option></select></label>
+<span class="tabs"><button id="tG" class="on">Game</button> <button id="tT">Teacher plan</button></span>
+</div></header>
+<main>
+<section id="game">
+<p><b>Help Rolly the pill bug explore the garden!</b> Finish each part of the garden to collect leaves 🍃. Play in any order.</p>
+<div class="map" id="map"></div><div class="prog"><i id="pb"></i></div>
+<div id="stage"><h2>Hello, I’m Rolly! 🐛</h2><p>Pick a garden spot above. 🔊 Tap words to hear them.</p></div>
+<div id="cert"></div>
+</section>
+
+<section id="plan" class="plan hide">
+<h2>Teacher plan · 25 minutes</h2>
+<p><b>Class:</b> Grade 7 · <b>Unit 2:</b> Awesome animals · <b>Lesson 5, part 2</b> (Activity Book: Vocabulary and Grammar)<br>
+<b>Lesson aims:</b> to use animal verbs in context and to use the first conditional.<br>
+<b>Target language:</b> bite, sting, roar, fight, dive, dig, hide, lay eggs, curl up, fly away, run away, die; first conditional.<br>
+<b>Materials:</b> Unit 2 flashcards (animal verbs), Activity Book pages 108–109, device or projector, Photocopiables 2, 7 and 11 (extra).</p>
+<table>
+<tr><th>Time</th><th>Stage</th><th>What happens</th><th>Teacher’s Book link</th></tr>
+<tr><td>0–4</td><td><b>Warm-up</b><br>Spot 1: Guess the Action</td><td>Students guess the animal verb from a picture, as in the Guessing game with the verb flashcards.</td><td>“Starting the lesson”: play the Guessing game (pictures) using the Unit 2 flashcards (animal verbs) as prompts.</td></tr>
+<tr><td>4–10</td><td><b>Formative 1</b><br>Spot 2: Read and Circle</td><td>Students read facts about the pill bug and circle the correct verb.</td><td>Activity 1: read and circle the correct options.</td></tr>
+<tr><td>10–16</td><td><b>Formative 2</b><br>Spot 3: Listen and Complete</td><td>Ask if students recognise the animal; explain that pill bugs are crustaceans, related to shrimps and crabs. Students listen to a presentation and complete the sentences.</td><td>Activity 2 (2.12): listen to a presentation about pill bugs, then complete the sentences.</td></tr>
+<tr><td>16–22</td><td><b>Formative 3</b><br>Spot 4: If … Will!</td><td>Students complete first conditional sentences with the correct verb forms. Remind: if + present simple, will + infinitive.</td><td>Activity 3: read and complete the sentences using the first conditional.</td></tr>
+<tr><td>22–25</td><td><b>Closing</b><br>Spot 5: Facts and a Fib</td><td>Students find the fib about pill bugs, then write their own first conditional sentence. Exit ticket.</td><td>Activities 4–5 (own ideas, compare with a partner) and “Finishing the lesson”: Three facts and a fib technique.</td></tr>
+</table>
+<h3>Differentiation</h3>
+<ul>
+<li><b>Support 🌱:</b> choices instead of typing in If … Will!, the audio script is shown, only two options in the guessing game, and sentence frames in the closing.</li>
+<li><b>Standard 🌿:</b> full activities, script behind a button (fewer points if used).</li>
+<li><b>Challenge 🌳:</b> typing without hints, two plays of the recording, and three own sentences.</li>
+</ul>
+<h3>Notes and keys</h3>
+<ul>
+<li><b>Listen and Complete key:</b> water, die, eggs, curl up, leaves, sting.</li>
+<li><b>If … Will! key:</b> feels / will curl up · gets / will die · look / will see · touch / won’t bite · sees / will fly away.</li>
+<li>The recording is read by the browser (text to speech) from a short script written for this game. Play your own Class Book/Activity Book audio 2.12 too, and compare the reading sentences with Activity Book pages 108–109.</li>
+<li>Deaf/hard of hearing students: use the Script button and written answers.</li>
+<li>Extra activities: Photocopiables 2, 7 and 11.</li>
+</ul>
+</section>
+<footer>Created by T.Badria Alfalahi</footer>
+</main>
+<script>
+const $=s=>document.querySelector(s),sh=a=>[...a].sort(()=>Math.random()-.5),lvl=()=>$('#lvl').value;
+const S={score:0,done:{},cur:-1},COL=['#ff6b6b','#ff9f1c','#2ec4b6','#3a86ff','#9b5de5'];
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function boom(){for(let i=0;i<18;i++){const b=document.createElement('span');b.className='boom';b.textContent=['🍃','🎉','🌼','🐛','⭐','🌿'][i%6];b.style.left=8+Math.random()*84+'vw';b.style.top=55+Math.random()*35+'vh';document.body.appendChild(b);setTimeout(()=>b.remove(),1400)}}
+function pts(n){S.score+=n;$('#sc').textContent=S.score}
+const ST=[{e:'🎭',t:'Guess the Action',m:4,k:'Warm-up'},{e:'📖',t:'Read and Circle',m:6,k:'Reading'},{e:'🎧',t:'Listen and Complete',m:6,k:'Listening, drag and drop'},{e:'🌱',t:'If … Will!',m:6,k:'First conditional'},{e:'🕵️',t:'Facts and a Fib',m:3,k:'Closing'}];
+function drawMap(){
+$('#map').innerHTML=ST.map((s,i)=>`<button class="st ${S.done[i]?'done':''} ${S.cur==i?'cur':''}" style="--c:${COL[i]}" data-i="${i}"><span class="em">${s.e}</span><b>Spot ${i+1}: ${s.t}</b><span>${s.k} · about ${s.m} min</span></button>`).join('');
+document.querySelectorAll('.st').forEach(b=>b.onclick=()=>go(+b.dataset.i));
+const n=Object.keys(S.done).length;$('#pb').style.width=n*20+'%';
+if(n==5)$('#cert').innerHTML=`<div class="cert"><div style="font-size:54px">🏆🐛🌿🌼</div><h2>Garden Explorer!</h2><p>Rolly says thank you! You know the animal verbs and the first conditional.<br><b>Final score: ${S.score}</b></p><small>Created by T.Badria Alfalahi</small></div>`}
+function finish(i,x=''){
+if(!S.done[i]){S.done[i]=1;pts(20);boom()}drawMap();
+const nx=ST.findIndex((_,j)=>!S.done[j]);
+$('#stage').insertAdjacentHTML('beforeend',`<div class="msg">🍃 You collected a leaf! +20 bonus. ${x}${nx>=0?`<br><button class="btn" id="nx" style="margin-top:8px">Next: ${ST[nx].t}</button>`:'<br>The garden is explored! Scroll down for your certificate!'}</div>`);
+if(nx>=0)$('#nx').onclick=()=>go(nx)}
+function go(i){S.cur=i;$('#stage').style.setProperty('--c',COL[i]);drawMap();[m0,m1,m2,m3,m4][i]();$('#stage').scrollIntoView({behavior:'smooth',block:'start'})}
+const head=i=>`<span class="tag">Spot ${i+1} · ${ST[i].k}</span><h2>${ST[i].t}</h2>`;
+const flash=(e,c='no')=>{e.classList.add(c);setTimeout(()=>e.classList.remove(c),450)};
+function dnd(check){
+let sel=null;
+document.querySelectorAll('.chip').forEach(c=>{c.ondragstart=e=>e.dataTransfer.setData('text',c.dataset.w);c.onclick=()=>{document.querySelectorAll('.chip.sel').forEach(x=>x.classList.remove('sel'));sel=c;c.classList.add('sel')}});
+document.querySelectorAll('.slot').forEach(s=>{s.ondragover=e=>e.preventDefault();s.ondrop=e=>{e.preventDefault();check(s,e.dataTransfer.getData('text'))};s.onclick=()=>{if(sel)check(s,sel.dataset.w)}})}
+const rm=w=>{const c=document.querySelector(`.chip[data-w="${w}"]`);if(c)c.remove()};
+const VB=[['curl up','🦔'],['dig','🐇🕳️'],['bite','🐊🦷'],['fight','🐓💥🐓'],['hide','🐱📦'],['roar','🦁📢'],['lay eggs','🐔🥚'],['sting','🐝⚡'],['fly away','🐦💨'],['dive','🐬🌊'],['run away','🐇💨'],['die','🥀']];
+
+function m0(){
+const L=lvl(),Q=sh(VB).slice(0,5);let r=0;
+const show=()=>{
+if(r==Q.length){$('#stage').innerHTML=head(0)+'<p class="big">🎉</p><p>Great guessing! Now act out a verb for your partner.</p>';return finish(0)}
+const [v,e]=Q[r],k=L=='support'?1:L=='challenge'?3:2,o=sh([v,...sh(VB.map(x=>x[0]).filter(x=>x!=v)).slice(0,k)]);
+$('#stage').innerHTML=head(0)+`<p>Picture ${r+1} of ${Q.length}. What is the animal doing?</p><div class="big">${e}</div><div class="opts">${o.map(x=>`<button class="opt" data-c="${x==v?1:0}">${x}</button>`).join('')}</div>`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(b.dataset.c=='1'){b.classList.add('ok');pts(8);say(v);r++;document.querySelectorAll('.opt').forEach(x=>x.disabled=true);setTimeout(show,950)}else{flash(b);b.disabled=true}})};
+show()}
+
+function m1(){
+const Q=[['Pill bugs live on','land','water'],['Pill bugs lay eggs and carry them','around','away'],['When a pill bug is in danger, it','curls up','flies away'],['Pill bugs usually','hide','dive','under leaves and rocks.'],['Pill bugs are not dangerous because they can’t bite or','sting','roar'],['If a pill bug gets too dry, it will','die','dig']];
+let q=0;
+const show=()=>{
+if(q==Q.length){$('#stage').innerHTML=head(1)+'<p>Rolly thanks you for the facts!</p>';return finish(1,'Pill bugs are small animals with big surprises.')}
+const it=Q[q],o=sh([it[1],it[2]]);
+$('#stage').innerHTML=head(1)+`<p>Read the fact ${q+1} of ${Q.length} and circle the correct option.</p><div class="row">${it[0]} <b>_____</b> ${it[3]||''}</div><div class="opts">${o.map(x=>`<button class="opt" data-c="${x==it[1]?1:0}">${x}</button>`).join('')}</div>`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(b.dataset.c=='1'){b.classList.add('ok');pts(8);say(it[0]+' '+it[1]+' '+(it[3]||''));document.querySelectorAll('.opt').forEach(x=>x.disabled=true);q++;setTimeout(show,1100)}else{flash(b);b.disabled=true}})};
+show()}
+
+const SCR=[['Rolly','Today I am talking about an unusual animal. It is the pill bug.'],['Rolly','Pill bugs live on land, but they need water. If they get too dry, they will die.'],['Rolly','Pill bugs lay eggs and carry them around.'],['Rolly','When they are in danger, they curl up into a ball.'],['Rolly','They usually hide under leaves and rocks, so we don’t often see them.'],['Rolly','They aren’t dangerous because they can’t bite or sting. I think they are amazing little animals!']];
+function m2(){
+const D=[['Pill bugs live on land, but they need','water','.'],['If they get too dry, they will','die','.'],['Pill bugs lay','eggs','and carry them around.'],['When they are in danger, they','curl up','into a ball.'],['They usually hide under','leaves','and rocks.'],['They can’t bite or','sting','.']];
+const L=lvl();let plays=0,used=L=='support',left=D.length;
+const scr=()=>`<div class="scr">${SCR.map(l=>l[1]).join(' ')}</div>`;
+const extra=L=='support'?[]:['dive'];
+$('#stage').innerHTML=head(2)+`<p>Rolly is giving a presentation about pill bugs. Press play, listen, then complete the sentences.</p><button class="btn" id="pl">🎧 Play</button> <button class="btn alt" id="sb">📄 Script</button> <small id="pc"></small><div id="sc2">${L=='support'?scr():''}</div><div class="chips">${sh([...D.map(d=>d[1]),...extra]).map(w=>`<span class="chip" draggable="true" data-w="${w}">${w}</span>`).join('')}</div>${D.map((d,i)=>`<div class="row">${d[0]} <span class="slot" data-i="${i}">${L=='support'?d[1][0]+' …':''}</span> ${d[2]}</div>`).join('')}`;
+$('#pl').onclick=()=>{if(L=='challenge'&&plays>=2)return;plays++;try{speechSynthesis.cancel();SCR.forEach(l=>{const u=new SpeechSynthesisUtterance(l[1]);u.lang='en-GB';u.rate=.85;speechSynthesis.speak(u)})}catch(e){}
+if(L=='challenge'){$('#pc').textContent=`Plays used: ${plays}/2`;if(plays>=2)$('#pl').textContent='No more plays'}};
+$('#sb').onclick=()=>{used=true;$('#sc2').innerHTML=scr()};
+dnd((s,w)=>{const i=+s.dataset.i;if(s.classList.contains('ok'))return;
+if(D[i][1]==w){s.classList.add('ok');s.textContent=w;rm(w);pts(used?5:10);say(D[i][0]+' '+w+' '+D[i][2]);if(--left==0)finish(2,'Pill bugs are crustaceans, like shrimps and crabs!')}else flash(s)})}
+
+function m3(){
+const L=lvl();
+const Q=[['If a pill bug (feel) ___ in danger,','feels',['feels','feel'],'it (curl up) ___.','will curl up',['will curl up','curls up']],
+['If it (get) ___ too dry,','gets',['gets','get'],'it (die) ___.','will die',['will die','dies']],
+['If you (look) ___ under a rock,','look',['look','will look'],'you (see) ___ a pill bug.','will see',['will see','see']],
+['If you (touch) ___ a pill bug,','touch',['touch','will touch'],'it (not bite) ___ you.','won’t bite',['won’t bite','doesn’t bite']],
+['If the bird (see) ___ a cat,','sees',['sees','will see'],'it (fly away) ___.','will fly away',['will fly away','flies away']]];
+const norm=s=>s.toLowerCase().replace(/[’']ll/g,' will').replace(/won[’']t/g,'will not').replace(/\s+/g,' ').trim();
+const cell=(txt,key,o,i,j)=>txt.replace('___',L=='support'?`<select class="inp" data-k="${i}-${j}"><option value="">choose…</option>${sh(o).map(x=>`<option>${x}</option>`).join('')}</select>`:`<input class="inp" data-k="${i}-${j}" autocomplete="off" autocapitalize="off" spellcheck="false">`);
+$('#stage').innerHTML=head(3)+`<p>Complete the first conditional sentences. Remember: <b>If + present simple, will + infinitive.</b></p>${Q.map((q,i)=>`<div class="row">${i+1}. ${cell(q[0],q[1],q[2],i,0)} ${cell(q[3],q[4],q[5],i,1)}</div>`).join('')}<button class="btn" id="ck">Check answers</button><div id="fb"></div>`;
+const got={};
+$('#ck').onclick=()=>{let n=0;document.querySelectorAll('.inp').forEach(x=>{const [i,j]=x.dataset.k.split('-').map(Number),key=norm(Q[i][j?4:1]),ok=norm(x.value)==key||(key=='will not bite'&&norm(x.value)=='will not bite');x.classList.toggle('ok',ok);x.classList.toggle('bad',!ok);if(ok){n++;if(!got[x.dataset.k]){got[x.dataset.k]=1;pts(5)}}});
+if(n==Q.length*2){$('#ck').remove();say('If you touch a pill bug, it won’t bite you.');finish(3,'If + present simple, will + infinitive!')}else $('#fb').innerHTML=`<p>${n} of ${Q.length*2} correct. Check the green ones and try again!</p>`}}
+
+function m4(){
+const R=[['Pill bugs live on land.','Pill bugs lay eggs.','Pill bugs can sting.','Pill bugs curl up into a ball.'],2],L=lvl(),need=L=='challenge'?3:1,F=/\bif\b[^.!?\n]*\b(will|’ll|'ll)\b/i;
+let idx=R[0].map((_,i)=>i);if(L=='support')idx=[2,0];
+$('#stage').innerHTML=head(4)+`<p>Three are facts and one is a <b>fib</b> (not true). Tap the fib!</p><div class="opts" style="grid-template-columns:1fr">${sh(idx).map(i=>`<button class="opt" data-i="${i}">${R[0][i]}</button>`).join('')}</div><div id="w"></div>`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(+b.dataset.i!=R[1]){flash(b);return}
+b.classList.add('ok');pts(10);document.querySelectorAll('.opt').forEach(x=>x.disabled=true);
+$('#w').innerHTML=`<p><b>Your turn!</b> Write ${need} first conditional sentence${need>1?'s':''} with your own ideas about animals.</p>${L=='support'?'<p><small>Example: If I see a pill bug, I will not touch it.</small></p>':''}<textarea id="tx" rows="4" style="width:100%" placeholder="If I … , I will …"></textarea><p><button class="btn" id="ck">Check</button></p><div id="fb"></div>`;
+$('#ck').onclick=()=>{const ls=$('#tx').value.split(/[.!?\n]+/).map(s=>s.trim()).filter(s=>F.test(s));
+if(ls.length>=need){pts(10*ls.length);$('#ck').remove();$('#tx').disabled=true;say(ls[0]);$('#fb').innerHTML=`<p>✅ Great sentence${ls.length>1?'s':''}! Compare with your partner: who wrote the best one?</p><p><b>Exit ticket:</b> “I can use the first conditional.”</p><div class="opts"><button class="opt" data-x>😟 Not yet</button><button class="opt" data-x>🙂 Nearly</button><button class="opt" data-x>😎 Yes!</button></div>`;
+document.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>{b.classList.add('ok');finish(4,'Thank you from Rolly! 🐛')})}
+else $('#fb').innerHTML=`<p>You have ${ls.length} of ${need}. Use: If + present simple, … will + verb.</p>`}})}
+
+$('#lvl').onchange=()=>{if(S.cur>=0&&!S.done[S.cur])go(S.cur)};
+$('#tG').onclick=()=>{$('#game').classList.remove('hide');$('#plan').classList.add('hide');$('#tG').classList.add('on');$('#tT').classList.remove('on')};
+$('#tT').onclick=()=>{$('#plan').classList.remove('hide');$('#game').classList.add('hide');$('#tT').classList.add('on');$('#tG').classList.remove('on')};
+drawMap();
+</script></body></html>
